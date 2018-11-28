@@ -1,0 +1,23 @@
+
+// Base Spacing Unit
+$spacing: 				22px;
+
+
+// Widths
+$max-page-width: 		1400px;
+$max-paragraph-width: 	45rem;
+
+
+// Layers
+$layers: (
+	above-top:			1100,
+	top:				1000,
+	below-top: 			900,
+	
+	above-middle:		600,
+	middle:				500,
+	below-middle:		400,
+	
+	above-bottom:		200,
+	bottom:				100
+);

@@ -1,0 +1,98 @@
+
+// How many columns should this grid have?
+$grid-columns-total: 12 !default;
+
+
+// Breakpoints
+$device-small:		414px; // portrait max.
+$device-large: 		568px; // landscape min.
+$tablet:			768px;
+$desk:				1200px;
+$desk-large:		2000px; // Above 1080p
+
+
+
+// Breakpoint Suffixes. The Grid will be generated from this array.
+$breakpoints:       'desk-large-and-up', 'desk-and-up', 'tablet-and-below', 'tablet-only', 'device-large-and-below', 'device-large-only', 'device-small-only';
+
+
+// ---- Mixins ---- \\
+
+/**
+* Wraps content in a media query based on `$media` param
+*/
+@mixin media($media) {
+
+	
+	// Desk large
+	@if $media == 'desk-large-and-up'{
+		@media only screen and (min-width: $desk-large) { @content; }
+	}
+	
+	
+	// Desk
+	@if $media == 'desk-and-up'{
+		@media only screen and (min-width: $desk) { @content; }
+	}
+	
+	
+	
+	// Tablets
+	@if $media == 'tablet-and-below' {
+		@media only screen and (max-width: $desk - 1px) { @content; }
+	}
+	
+	@if $media == 'tablet-only' {
+		@media only screen and (min-width: $tablet) and (max-width: $desk - 1px) { @content; }
+	}
+	
+
+	// Landscape smarthphones and small tablets
+	@if $media == 'device-large-and-below' {
+		@media only screen and (max-width: $tablet - 1px) { @content; }
+	}
+	
+	@if $media == 'device-large-only' {
+		@media only screen and (min-width: $device-large) and (max-width: $tablet - 1px) { @content; }
+	}
+
+
+
+	// Portrait smartphones
+	@if $media == 'device-small-only' {
+		@media only screen and (max-width: $palm-end) { @content; }
+	}
+
+
+}
+
+
+/**
+* Generate grid sizes for each column with optional `$namespace`.
+* Supports both flex and float grid.
+*/
+@mixin grid-generate($namespace: '') {
+	@for $i from 1 through $grid-columns-total {
+		.size-#{$i}#{$namespace} {
+			width: ($i / $grid-columns-total) * 100%;
+			flex-basis: ($i / $grid-columns-total) * 100%;
+			max-width: ($i / $grid-columns-total) * 100%;
+		}
+	}
+
+	.clear#{$namespace} {
+		clear: both;
+	}
+}
+
+@mixin clearfix() {
+	&:after {
+		clear: both;
+		content: '';
+		display: table;
+	}
+}
+
+%clearfix {
+	@include clearfix;
+}

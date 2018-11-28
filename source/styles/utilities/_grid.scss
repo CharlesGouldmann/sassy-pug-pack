@@ -1,0 +1,221 @@
+
+.grid {
+	@extend %clearfix;
+	float: left;
+	padding-left: $spacing/2;
+	padding-right: $spacing/2;
+	
+	@if $transitions == true {
+		transition: .3s width;
+	}
+}
+
+.grid--last {
+	@extend %clearfix;
+	float: right;
+}
+
+.grid--no-spacing {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+
+@each $breakpoint in $breakpoints {
+	@include media($breakpoint) {
+		.grid--no-spacing-_#{$breakpoint} {
+		padding-left: 0;
+		padding-right: 0;
+		}
+	}
+}
+
+
+
+.grid-group {
+	@extend %clearfix;
+	margin-left: -$spacing/2;
+	margin-right: -$spacing/2;
+	float: none;
+}
+
+.grid-group--reverse {
+	> .grid {
+		float: right;
+	}
+}
+
+
+// Flexbox grid-system
+//--------------------------------------------------
+
+
+
+.flex-group {
+	display: flex;
+	flex: 0 1 auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+	min-width: 100%;
+
+	// Cancelling out edge-spacing made by grid
+	margin-left: -$spacing/2;
+	margin-right: -$spacing/2;
+
+	// we dont want clearfix for flexbox
+	// as it breaks the spacing
+	&:after {
+		display: none;
+	}
+}
+
+.flex {
+	flex-grow: 1;
+	max-width: 100%;
+
+	padding-left: $spacing/2;
+	padding-right: $spacing/2;
+}
+
+// Make IE show a width on flex items
+// by only setting flex-basis on other browsers
+@supports(display: flex) {
+	.flex {
+	flex-basis: 0;
+	}
+}
+
+
+
+
+// Flex-group classes
+//--------------------------------------------------
+
+@mixin generate-group-classes($namespace: '') {
+
+	.flex-align {
+	&--start#{$namespace} {
+		justify-content: flex-start;
+		text-align: start;
+	}
+
+	&--center#{$namespace} {
+		justify-content: center;
+		text-align: center;
+	}
+
+	&--end#{$namespace} {
+		justify-content: flex-end;
+		text-align: end;
+	}
+
+	&--top#{$namespace} {
+		align-items: flex-start;
+	}
+
+	&--middle#{$namespace} {
+		align-items: center;
+	}
+
+	&--bottom#{$namespace} {
+		align-items: flex-end;
+	}
+
+	}
+
+
+	.flex-distribute {
+	&--around#{$namespace} {
+		justify-content: space-around;
+	}
+
+	&--between#{$namespace} {
+		justify-content: space-between;
+	}
+
+	}
+
+
+	.flex-items {
+	&--stunted {
+		.flex {
+		flex-grow: 0;
+		}
+	}
+	}
+
+
+
+	.flex-reverse#{$namespace},
+	.flex-group--reverse#{$namespace} {
+	flex-direction: row-reverse;
+	}
+
+	.flex-direction--column#{$namespace} {
+	flex-direction: column;
+	}
+
+}
+
+// Generate group-align classes without suffix.
+@include generate-group-classes();
+
+// Generate group-align classes with all the breakpoint suffixes
+@each $breakpoint in $breakpoints {
+	@include media($breakpoint) {
+	@include generate-group-classes('-_#{$breakpoint}');
+	}
+}
+
+
+
+
+// Flex classes
+//--------------------------------------------------
+
+@mixin generate-flex-classes($namespace: '') {
+	.flex-order,
+	.flex {
+	&--first#{$namespace} {
+		order: -1;
+
+		.group-reverse#{$namespace} &,
+		.flex-group--reverse#{$namespace} & {
+		order: 99;
+		}
+	}
+
+	&--last#{$namespace} {
+		order: 99;
+
+		.group-reverse#{$namespace} &,
+		.flex-group--reverse#{$namespace} & {
+		order: 0;
+		}
+	}
+	}
+}
+
+// Generate group-align classes without suffix.
+@include generate-flex-classes();
+
+// Generate group-align classes with all the breakpoint suffixes
+@each $breakpoint in $breakpoints {
+	@include media($breakpoint) {
+	@include generate-flex-classes('-_#{$breakpoint}');
+	}
+}
+
+
+
+// Generate Grid without suffix.
+@include grid-generate();
+
+// Generate Grid with all the breakpoint suffix
+@each $breakpoint in $breakpoints {
+	@include media($breakpoint) {
+		@include grid-generate('--#{$breakpoint}');
+	}
+}
+
+

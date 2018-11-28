@@ -1,0 +1,87 @@
+// Typography
+
+
+// ---- Headings ---- \\
+
+// Defaults
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@extend %limit-width;
+	@extend %flush-top;
+	font-family: $font-family-secondary;
+	line-height: map-get($line-heights, 'heading');
+}
+
+h4,
+h5,
+h6 {
+	margin-bottom: $spacing/4;
+}
+
+
+// Individual styling
+h1 {
+	font-size: map-get($font-sizes, 'h1');
+	font-weight: map-get($font-weights, 'bold');
+}
+
+h2 {
+	font-size: map-get($font-sizes, 'h2');
+	font-weight: map-get($font-weights, 'bold');
+}
+
+h3 {
+	font-size: map-get($font-sizes, 'h3');
+	font-weight: map-get($font-weights, 'bold');
+}
+
+h4 {
+	font-size: map-get($font-sizes, 'h4');
+	font-weight: map-get($font-weights, 'semi-bold');
+}
+
+h5 {
+	font-size: map-get($font-sizes, 'h5');
+	font-weight: map-get($font-weights, 'semi-bold');
+}
+
+h6 {
+	font-size: map-get($font-sizes, 'h6');
+	font-weight: map-get($font-weights, 'semi-bold');
+}
+
+
+
+
+// ---- Other text elements ---- \\
+
+.lead,
+.paragraph--large {
+	@extend %limit-width;
+	font-size: map-get($font-sizes, 'lead');
+	line-height: map-get($line-heights, 'lead');
+}
+
+.paragraph--small {
+	font-size: map-get($font-sizes, 'milli');
+}
+
+p {
+	@extend %limit-width;
+}
+
+
+small {
+	font-size: map-get($font-sizes, 'small')
+}
+
+
+blockquote {
+	font-family: $font-family-secondary;
+	font-size: map-get($font-sizes, 'blockquote');
+}
+
