@@ -22,12 +22,6 @@ html {
 	// height: 100%; // Disabled to enable scroll
 	width: 100%;
 	background-color: $color-body;
-
-	&.is-locked {
-		height: 100%;
-		background-color: $color-overlay;
-		overflow: hidden;
-	}
 }
 
 body {
@@ -42,23 +36,6 @@ body {
 	font-weight: map-get($font-weights, 'base');
 	line-height: map-get($line-heights, 'base');
 
-}
-
-.container {
-	@extend %clearfix;
-	margin: 0 auto;
-	max-width: $max-page-width;
-	padding-left: $spacing/2;
-	padding-right: $spacing/2;
-
-	@include media(lap-and-up) {
-		padding-left: $spacing;
-		padding-right: $spacing;
-	}
-
-	&.mod--no-padding {
-		padding: 0;
-	}
 }
 
 img {
@@ -82,6 +59,8 @@ hr {
 	margin-top: 0;
 }
 
+
+
 // Remove Link styling.
 a {
 	color: inherit;
@@ -104,15 +83,20 @@ iframe {
 		height: 100%;
 }
 
-// Add proper link styling with this, when outside e.g. a content area
-.link {
-	@extend %link;
-}
 
-// Use this to define an area where we need proper link styles, e.g content area or footer.
-.has-link-style {
-	a {
-		@extend %link;
+.container {
+	@extend %clearfix;
+	margin: 0 auto;
+	max-width: $max-page-width;
+	padding-left: $spacing/2;
+	padding-right: $spacing/2;
+
+	@include media(lap-and-up) {
+		padding-left: $spacing;
+		padding-right: $spacing;
+	}
+
+	&.mod--no-padding {
+		padding: 0;
 	}
 }
-

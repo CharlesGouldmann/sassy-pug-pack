@@ -61,7 +61,7 @@ $breakpoints:       'desk-large-and-up', 'desk-and-up', 'tablet-and-below', 'tab
 
 	// Portrait smartphones
 	@if $media == 'device-small-only' {
-		@media only screen and (max-width: $palm-end) { @content; }
+		@media only screen and (max-width: $device-small) { @content; }
 	}
 
 
