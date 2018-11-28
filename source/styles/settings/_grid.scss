@@ -2,6 +2,7 @@
 // How many columns should this grid have?
 $grid-columns-total: 12 !default;
 
+$transitions: true;
 
 // Breakpoints
 $device-small:		414px; // portrait max.
