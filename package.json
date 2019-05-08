@@ -1,7 +1,7 @@
 {
-  "name": "vvsmester-prototype",
-  "version": "1.0.0",
-  "description": "",
+  "name": "sassy-pug-pack",
+  "version": "0.0.2",
+  "description": "A prototyping seed that uses pug and SASS for templating and styling.",
   "main": "main.js",
   "scripts": {
     "dev": "webpack --mode development",
